@@ -17,6 +17,7 @@ public class ApplePicker : MonoBehaviour
             Vector3 pos = Vector3.zero;
             pos.y = basketBottomY + (basketSpacingY * i);
             tBasketGO.transform.position = pos;
+            basketList.add(tBasketGO);
         }
     }
 
@@ -24,5 +25,17 @@ public class ApplePicker : MonoBehaviour
     void Update()
     {
        
+    }
+    public void AppleDestroyed()
+    {
+        GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
+        foreach(GameObject tGO in tAppleArray)
+        {
+            AppleDestroyed(tGO);
+        }
+        int basketIndex = basketList.Count - 1;
+        GameObject tBasketGO = basketList[basketIndex];
+        basketList.RemoveAt(basketIndex);
+        Destroy(tBasketGO);
     }
 }
